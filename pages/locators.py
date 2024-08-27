@@ -6,8 +6,7 @@ class MainPageLocators:
 
 class LoginPageLocators:
     LOGIN_NAME = (By.CSS_SELECTOR, '#id_login-username')
-    # LOGIN_PASSWORD = (By.CSS_SELECTOR, '#id_login-password')
-     
     REG_EMAIL = (By.CSS_SELECTOR, '#id_registration-email')
-    # REG_PASSWORD1 =  (By.CSS_SELECTOR, '#id_registration-password1')
-    # REG_PASSWORD2 = (By.CSS_SELECTOR, '#id_registration-password2')
+    
+class CardPageLocators:
+    PRODUCT_BTN = (By.CSS_SELECTOR, 'button.btn-add-to-basket')
