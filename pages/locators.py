@@ -10,3 +10,7 @@ class LoginPageLocators:
     
 class CardPageLocators:
     PRODUCT_BTN = (By.CSS_SELECTOR, 'button.btn-add-to-basket')
+    PRODUCT_TITLE = (By.CSS_SELECTOR, '.product_main h1')
+    PRODUCT_PRICE = (By.CSS_SELECTOR, '.product_main .price_color')
+    PRODUCT_MSG_TITLE = (By.CSS_SELECTOR, '#messages div:nth-child(1) div strong')
+    PRODUCT_MSG_PRICE = (By.CSS_SELECTOR, '#messages div:nth-child(3) div strong')
