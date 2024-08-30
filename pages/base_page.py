@@ -15,9 +15,10 @@ class BasePage:
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
-
-    def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+        
+    def go_to_basket_view_page(self):
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_BTN)
+        basket_link.click()
 
     def open(self):
         self.browser.get(self.url)
@@ -44,6 +45,12 @@ class BasePage:
             return False
         return True
 
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+        
+    def should_be_basket_button(self):
+        assert self.is_element_present(*BasePageLocators.BASKET_BTN), f'Basket button on the {self.browser.current_url} is not present'
+        
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

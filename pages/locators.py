@@ -3,9 +3,14 @@ from selenium.webdriver.common.by import By
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BASKET_BTN = (By.XPATH, '//a[contains(@href, "basket")]')
 
 class MainPageLocators:
-    LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+    pass
+
+class BasketPageLocators:
+    BASKET_BTN_PROCEED = (By.XPATH, '//a[contains(@href, "checkout")]')
+    BASKET_CONTINUE_LINK = (By.XPATH, '//div[@id="content_inner"]/p/a')
 
 class LoginPageLocators:
     LOGIN_NAME = (By.CSS_SELECTOR, '#id_login-username')
