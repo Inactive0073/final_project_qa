@@ -51,6 +51,10 @@ class BasePage:
     def should_be_basket_button(self):
         assert self.is_element_present(*BasePageLocators.BASKET_BTN), f'Basket button on the {self.browser.current_url} is not present'
         
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                 " probably unauthorised user"
+        
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

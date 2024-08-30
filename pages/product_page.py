@@ -20,7 +20,7 @@ class ProductPage(BasePage):
         assert self.browser.find_element(*CardPageLocators.PRODUCT_PRICE).text == self.browser.find_element(*CardPageLocators.PRODUCT_MSG_PRICE).text
         
     def should_not_be_success_message(self):
-        assert self.is_not_element_present(*CardPageLocators.PRODUCT_MSG_TITLE), \
+        assert not self.is_not_element_present(*CardPageLocators.PRODUCT_MSG_TITLE), \
         "Success message is presented, but should not be"
         
     def should_be_disappear_message_after_addition_product_card(self):

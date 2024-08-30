@@ -1,6 +1,35 @@
 from .pages.product_page import ProductPage
-from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
 import pytest
+
+
+@pytest.mark.user_add_to_basket
+class TestUserAddToBasketFromProductPage:
+    @pytest.fixture(scope='function', autouse=True)
+    def setup(self, browser):
+        page = LoginPage(browser, 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/')
+        page.open()
+        page.should_be_register_form()
+        page.register_new_user()
+        page.should_be_authorized_user()
+        
+        
+    def test_user_cant_see_success_message_after_adding_product_to_basket(self,browser):
+        link='http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/'
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.click_to_add_to_the_cart_button()
+        product_page.should_not_be_success_message()
+        
+    def test_user_can_add_product_to_basket(self, browser):
+        link='http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/'
+        product_page = ProductPage(browser=browser, url=link)
+        product_page.open()
+        product_page.should_be_btn_add_in_cart()
+        product_page.click_to_add_to_the_cart_button()
+        product_page.should_be_success_msg_about_addition()
+        product_page.title_should_be_the_same()
+        product_page.price_should_be_the_same()
 
 xfile = 7
 mask = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer'
