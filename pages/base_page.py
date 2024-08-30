@@ -1,21 +1,22 @@
 from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException # в начале файла
+from selenium.common.exceptions import NoAlertPresentException  # в начале файла
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from .locators import BasePageLocators
 import math
 
+
 class BasePage:
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         # self.browser.implicitly_wait(timeout)
-        
+
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
-        
+
     def go_to_basket_view_page(self):
         basket_link = self.browser.find_element(*BasePageLocators.BASKET_BTN)
         basket_link.click()
@@ -29,32 +30,40 @@ class BasePage:
         except NoSuchElementException:
             return False
         return True
-    
+
     def is_not_element_present(self, method, selector, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((method, selector)))
+            WebDriverWait(self.browser, timeout).until(
+                EC.presence_of_element_located((method, selector))
+            )
         except TimeoutException:
             return True
         return False
-    
+
     def is_disappeared(self, method, selector, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout, 1, TimeoutException).\
-                until_not(EC.presence_of_element_located((method, selector)))
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
+                EC.presence_of_element_located((method, selector))
+            )
         except TimeoutException:
             return False
         return True
 
     def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
-        
+        assert self.is_element_present(
+            *BasePageLocators.LOGIN_LINK
+        ), "Login link is not presented"
+
     def should_be_basket_button(self):
-        assert self.is_element_present(*BasePageLocators.BASKET_BTN), f'Basket button on the {self.browser.current_url} is not present'
-        
+        assert self.is_element_present(
+            *BasePageLocators.BASKET_BTN
+        ), f"Basket button on the {self.browser.current_url} is not present"
+
     def should_be_authorized_user(self):
-        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
-                                                                 " probably unauthorised user"
-        
+        assert self.is_element_present(*BasePageLocators.USER_ICON), (
+            "User icon is not presented," " probably unauthorised user"
+        )
+
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

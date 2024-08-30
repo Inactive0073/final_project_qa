@@ -5,5 +5,3 @@ from .locators import BasePageLocators
 
 class MainPage(BasePage):
     pass
-
-    
