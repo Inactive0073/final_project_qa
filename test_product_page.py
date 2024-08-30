@@ -62,15 +62,3 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open()
     
-@pytest.mark.new
-def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
-    link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/'
-    page = ProductPage(browser, link)
-    page.open()
-    page.should_be_basket_button()
-    page.go_to_basket_view_page()
-    basket_page = BasketPage(browser, browser.current_url)
-    basket_page.should_not_be_empty_basket()
-    basket_page.should_be_empty_basket()
-    basket_page.should_be_continue_link_if_basket_is_empty()
-    basket_page.should_not_be_continue_link_if_basket()
